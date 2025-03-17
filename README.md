@@ -5,6 +5,6 @@
     <h2>Requirements</h2>
     <lu>
         <li>pip install pdm</li>
-        <li>2: pdm install</li>
+        <li>pdm install</li>
     </lu>
 </div>
