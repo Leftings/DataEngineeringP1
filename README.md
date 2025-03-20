@@ -7,4 +7,6 @@
         <li>pip install pdm</li>
         <li>pdm install</li>
     </lu>
+    <h2>Dashboards</h2>
+    <p>https://grafana.com/grafana/download?platform=windows</p>
 </div>
