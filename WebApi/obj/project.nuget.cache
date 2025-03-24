@@ -1,15 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "8/bZnIZ2hGc=",
+  "dgSpecHash": "eDJStDjqa0E=",
   "success": true,
   "projectFilePath": "C:\\Users\\jdvis_x5odeao\\Semester_4\\DataEngineeringP1\\WebApi\\WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jdvis_x5odeao\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\jdvis_x5odeao\\.nuget\\packages\\microsoft.identity.client\\4.70.0\\microsoft.identity.client.4.70.0.nupkg.sha512",
+    "C:\\Users\\jdvis_x5odeao\\.nuget\\packages\\microsoft.identitymodel.abstractions\\6.35.0\\microsoft.identitymodel.abstractions.6.35.0.nupkg.sha512",
     "C:\\Users\\jdvis_x5odeao\\.nuget\\packages\\microsoft.openapi\\1.6.23\\microsoft.openapi.1.6.23.nupkg.sha512",
     "C:\\Users\\jdvis_x5odeao\\.nuget\\packages\\swashbuckle.aspnetcore\\8.0.0\\swashbuckle.aspnetcore.8.0.0.nupkg.sha512",
     "C:\\Users\\jdvis_x5odeao\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\8.0.0\\swashbuckle.aspnetcore.swagger.8.0.0.nupkg.sha512",
     "C:\\Users\\jdvis_x5odeao\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\8.0.0\\swashbuckle.aspnetcore.swaggergen.8.0.0.nupkg.sha512",
-    "C:\\Users\\jdvis_x5odeao\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\8.0.0\\swashbuckle.aspnetcore.swaggerui.8.0.0.nupkg.sha512"
+    "C:\\Users\\jdvis_x5odeao\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\8.0.0\\swashbuckle.aspnetcore.swaggerui.8.0.0.nupkg.sha512",
+    "C:\\Users\\jdvis_x5odeao\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.1\\system.diagnostics.diagnosticsource.6.0.1.nupkg.sha512",
+    "C:\\Users\\jdvis_x5odeao\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }
