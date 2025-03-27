@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WebApi
-build_property.ProjectDir = C:\Users\jdvis_x5odeao\Semester_4\DataEngineeringP1\WebApi\
+build_property.ProjectDir = /Users/shahzeb/Documents/CODE/PYTHON/DEDSGROEPPROJECT2REAL/DataEngineeringP1/WebApi/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
