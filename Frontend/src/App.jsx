@@ -1,6 +1,7 @@
 import "./index.css";
 import CustomLineChart from "./DashboardElements/CustomLinechart.jsx";
 import CustomBarChart from "./DashboardElements/CustomBarChart.jsx";
+import CustomBarChartInfo from "./DashboardElements/CustomBarChartInfo.jsx";
 import { Card, CardContent} from "./DashboardElements/Cards.jsx";
 
 const salesData = [
@@ -27,7 +28,9 @@ function App() {
       <CustomLineChart name="Sales Data" width={salesData.length * 50} height={300} data={salesData} xAxis="month"></CustomLineChart>
 
       {/* Sales Breakdown Chart */}
-      <CustomBarChart name="Product Sales" width={productSales.length * 100} height={300} data={productSales} xAxis="product"></CustomBarChart>
+      <CustomBarChart name="Product Sales" width={productSales.length * 100} height={300} data={productSales} xAxis="product" dataKey="sales"></CustomBarChart>
+
+      <CustomBarChartInfo name="Product Sales" width={productSales.length * 100} height={300} data={productSales} xAxis="product" dataKey="sales"></CustomBarChartInfo>
     </div>
   );
 }

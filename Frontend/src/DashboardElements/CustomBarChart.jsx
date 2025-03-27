@@ -1,7 +1,7 @@
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import { Card, CardContent } from "./Cards";
 
-function CustomBarChart({name, width, height, data, xAxis}) {
+function CustomBarChart({name, width, height, data, xAxis, dataKey}) {
     return(
         <Card>
             <CardContent>
@@ -10,8 +10,9 @@ function CustomBarChart({name, width, height, data, xAxis}) {
                 <BarChart data={data}>
                     <XAxis dataKey={xAxis} />
                     <YAxis />
-                    <Tooltip />
-                    <Bar dataKey="sales" fill="#ef4444" />
+                    <Tooltip/>
+                    <Legend />
+                    <Bar dataKey={dataKey} fill="#ef4444" />
                 </BarChart>
                 </ResponsiveContainer>
             </CardContent>
