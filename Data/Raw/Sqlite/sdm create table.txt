@@ -1,0 +1,547 @@
+CREATE TABLE Product
+(
+    product_id INT,
+    [name] TEXT,
+    [description] TEXT,
+    prod_size TEXT,
+    color TEXT,
+    quantity INT,
+    unit_price INT,
+    picture_name TEXT,
+    category TEXT,
+
+    PRIMARY KEY (product_id)
+);
+
+CREATE TABLE Department
+(
+    department_id INT,
+    department_name VARCHAR(255),
+    group_name VARCHAR(255),
+    dept_head_id INT,
+    modified_date DATE,
+
+    PRIMARY KEY (department_id)
+);
+
+CREATE TABLE State
+(
+    state_id VARCHAR(2),
+    state_name TEXT,
+    state_capital TEXT,
+    country TEXT,
+    region TEXT,
+
+    PRIMARY KEY (state_id)
+);
+
+CREATE TABLE Employee
+(
+    employee_id INT,
+    fist_name TEXT,
+    last_name TEXT,
+    title TEXT,
+    title_of_courtesy VARCHAR(4),
+    reports_to INT,
+    birth_date DATE,
+    hire_date DATE,
+    [address] TEXT,
+    city TEXT,
+    region VARCHAR(10),
+    postal_code TEXT,
+    home_phone TEXT,
+    extension INT,
+    bene_health_ins TEXT,
+    bene_life_ins TEXT,
+    bene_day_care TEXT,
+    sex TEXT,
+    photo IMAGE,
+    notes TEXT,
+    photo_path TEXT,
+    manager_id INT,
+    department_id INT,
+    street TEXT,
+    [status] TEXT,
+    ss_number INT,
+    salary INT,
+
+    PRIMARY KEY (employee_id),
+    FOREIGN KEY (department_id) REFERENCES Department(department_id)
+);
+
+CREATE TABLE Customer
+(
+    customer_id INT,
+    fname TEXT,
+    lname TEXT,
+    [address] TEXT,
+    city TEXT,
+    [state] VARCHAR(2),
+    zip TEXT,
+    phone INT,
+    company_name TEXT,
+
+    PRIMARY KEY (customer_id),
+    FOREIGN KEY ([state]) REFERENCES [State](state_id)
+);
+
+CREATE TABLE Bonus
+(
+    employee_id INT,
+    bonus_date TEXT,
+    bonus_amount TEXT,
+
+    FOREIGN KEY (employee_id) REFERENCES Employee(employee_id)
+);
+
+CREATE TABLE Sales_Order
+(
+    id INT,
+    customer_id INT,
+    order_date TEXT,
+    region TEXT,
+    sales_rep INT,
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),
+    FOREIGN KEY (sales_rep) REFERENCES Employee(employee_id)
+);
+
+CREATE TABLE Sales_Order_Item
+(
+    id INT,
+    line_id INT,
+    product_id INT,
+    quantity INT,
+    ship_date TEXT,
+
+    FOREIGN KEY (id) REFERENCES Sales_Order(id),
+    FOREIGN KEY (product_id) REFERENCES Product(product_id)
+);
+
+CREATE TABLE Region
+(
+    region_id INT,
+    region_description TEXT,
+
+    PRIMARY KEY (region_id)
+);
+
+CREATE TABLE Territory
+(
+    territory_id INT,
+    territory_Description TEXT,
+    region_id INT,
+
+    PRIMARY KEY (territory_id),
+    FOREIGN KEY (region_id) REFERENCES Region(region_id)
+);
+
+CREATE TABLE Employee_Territories
+(
+    employee_id INT,
+    territory_id INT,
+
+    FOREIGN KEY (employee_id) REFERENCES Employee(employee_id),
+    FOREIGN KEY (territory_id) REFERENCES Territory(territory_id)
+);
+
+CREATE TABLE Category
+(
+    category_id INT,
+    category_name TEXT,
+    [description] TEXT,
+    picture IMAGE,
+
+    PRIMARY KEY (category_id)
+);
+
+CREATE TABLE Supplier
+(
+    supplier_id INT,
+    company_name TEXT,
+    contact_name TEXT,
+    contact_title TEXT,
+    [address] TEXT,
+    city TEXT,
+    region TEXT,
+    postal_code VARCHAR(20),
+    country VARCHAR(50),
+    phone VARCHAR(35),
+    fax VARCHAR(35),
+    home_page TEXT,
+
+    PRIMARY KEY (supplier_id)
+);
+
+CREATE TABLE Products
+(
+    product_id INT,
+    product_name TEXT,
+    supplier_id INT,
+    category_id INT,
+    quantity_per_unit TEXT,
+    unit_price DECIMAL,
+    units_in_stock INT,
+    units_on_order INT,
+    reorder_level INT,
+    discontinued INT,
+
+    PRIMARY KEY (product_id),
+    FOREIGN KEY (supplier_id) REFERENCES Supplier(supplier_id),
+    FOREIGN KEY (category_id) REFERENCES Category(category_id)
+);
+
+CREATE TABLE Customers
+(
+    customer_id VARCHAR(50),
+    company_name TEXT,
+    contact_name TEXT,
+    contact_title TEXT,
+    [address] TEXT,
+    city TEXT,
+    region TEXT,
+    postal_code TEXT,
+    phone VARCHAR(35),
+    fax VARCHAR(35)
+
+    PRIMARY KEY (customer_id)
+);
+
+CREATE TABLE CustomerDemographics
+(
+    customer_type_id INT,
+    customer_desc TEXT,
+
+    PRIMARY KEY (customer_type_id)
+);
+
+CREATE TABLE CustomerCustomerDemo
+(
+    customer_id VARCHAR(50),
+    customer_type_id INT,
+
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (customer_type_id) REFERENCES CustomerDemographics(customer_type_id)
+);
+
+CREATE TABLE Shipper
+(
+    shipper_id INT,
+    company_name TEXT,
+    phone varchar(30),
+
+    PRIMARY KEY (shipper_id)
+)
+
+CREATE TABLE [Order]
+(
+    order_id INT,
+    customer_id VARCHAR(50),
+    employee_id INT,
+    order_date DATE,
+    required_date DATE,
+    shipped_date DATE,
+    ship_via INT,
+    freight DECIMAL,
+    ship_name TEXT,
+    ship_address TEXT,
+    ship_city TEXT,
+    ship_region TEXT,
+    ship_postal_code TEXT,
+    ship_country TEXT,
+
+    PRIMARY KEY (order_id),
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (employee_id) REFERENCES Employee(employee_id),
+    FOREIGN KEY (ship_via) REFERENCES Shipper(shipper_id)
+);
+
+CREATE TABLE Order_Detail
+(
+    order_id INT,
+    product_id INT,
+    unit_price DECIMAL,
+    quantity INT,
+    discount DECIMAL,
+
+    FOREIGN KEY (order_id) REFERENCES [Order](order_id),
+    FOREIGN KEY (product_id) REFERENCES Products(product_id)
+);
+
+CREATE TABLE HumanResources_Department
+(
+    department_id INT,
+    [name] VARCHAR(255),
+    group_name VARCHAR(255),
+    modified_date DATE,
+    
+    PRIMARY KEY (department_id)
+);
+
+CREATE TABLE HumanResources_Employee
+(
+    business_entity_id INT,
+    national_id_number VARCHAR(15),
+    login_id VARCHAR(255),
+    orginazation_node VARBINARY(max),
+    orginazation_level INT,
+    job_title VARCHAR(100),
+    birth_date DATE,
+    martial_status VARCHAR(50),
+    gender varchar(10),
+    hire_date DATE,
+    salaried_flag INT,
+    vacation_hours INT,
+    stick_leave_hours INT,
+    current_flag INT,
+    rowguid UNIQUEIDENTIFIER ROWGUIDCOL DEFAULT NEWID(),
+    modified_date DATE,
+    department_id INT,
+
+    PRIMARY KEY (business_entity_id),
+    FOREIGN KEY (department_id) REFERENCES Humanresources_Department(department_id)
+);
+
+CREATE TABLE Person_Person
+(
+    business_entity_id INT,
+    person_type VARCHAR(50),
+    name_style INT,
+    title VARCHAR(50),
+    first_name VARCHAR(100),
+    middle_name VARCHAR(100),
+    last_name VARCHAR(100),
+    suffix varchar(100),
+    email_promotion INT,
+    rowguid UNIQUEIDENTIFIER ROWGUIDCOL DEFAULT NEWID(),
+    modified_date DATE,
+
+    PRIMARY KEY (business_entity_id),
+    FOREIGN KEY (business_entity_id) REFERENCES humanresources_employee(business_entity_id)
+);
+
+CREATE TABLE Person_Address
+(
+    adress_id INT,
+    adress_line_1 VARCHAR(255),
+    adress_line_2 VARCHAR(255),
+    city VARCHAR(255),
+    state_province INT,
+    postal_code varchar(10),
+    spatial_location varbinary(max),
+    rowguid UNIQUEIDENTIFIER ROWGUIDCOL DEFAULT NEWID(),
+    modified_date DATE,
+    business_entity_id INT,
+
+    PRIMARY KEY (adress_id),
+    FOREIGN KEY (business_entity_id) REFERENCES person_person(business_entity_id)
+);
+
+CREATE TABLE Production_BillOfMaterials
+(
+    bill_of_materials_id INT,
+    product_assembly_id INT,
+    component_id INT,
+    [start_date] DATE,
+    end_date DATE,
+    unit_measure_code VARCHAR(25),
+    bom_level INT,
+    per_assembly_qty DECIMAL(8, 2),
+    modified_date DATE,
+
+    PRIMARY KEY (bill_of_materials_id)
+);
+
+CREATE TABLE Production_ProductCategory
+(
+    product_category_id INT,
+    [name] VARCHAR(255),
+    rowguid UNIQUEIDENTIFIER ROWGUIDCOL DEFAULT NEWID(),
+    modified_date DATE,
+
+    PRIMARY KEY (product_category_id)
+);
+
+CREATE TABLE Production_Product
+(
+    product_id INT,
+    [name] VARCHAR(255),
+    product_number VARCHAR(100),
+    make_flag INT,
+    finished_goods_flag INT,
+    color VARCHAR(25),
+    safety_stock_level INT,
+    reorder_point INT,
+    standard_cost DECIMAL,
+    list_price DECIMAL,
+    [size] VARCHAR(100),
+    size_unit_measure_code VARCHAR(50),
+    weight_unit_measure_code VARCHAR(50),
+    [weight] INT,
+    days_to_manufacture INT,
+    product_line VARCHAR(50),
+    class VARCHAR(50),
+    style VARCHAR(50),
+    product_subcategory_id INT,
+    product_model_id INT,
+    sell_start_date DATE,
+    sell_end_date DATE,
+    discontinued DATE,
+    rowguid UNIQUEIDENTIFIER ROWGUIDCOL DEFAULT NEWID(),
+    modified_date DATE,
+    product_category_id INT,
+
+    PRIMARY KEY (product_id),
+    FOREIGN KEY (product_category_id) REFERENCES Production_ProductCategory(product_category_id)
+);
+
+CREATE TABLE Purchasing_PurchaseOrderHeader
+(
+    purchase_order_id INT,
+    revision_number INT,
+    [status] INT,
+    employee_id INT,
+    vendor_id INT,
+    ship_method_id INT,
+    order_date DATE,
+    ship_date DATE,
+    sub_total DECIMAL,
+    tax_amt DECIMAL,
+    freight DECIMAL,
+    total_due DECIMAL,
+    modified_date DATE,
+
+    PRIMARY KEY (purchase_order_id),
+    FOREIGN KEY (employee_id) REFERENCES HumanResources_Employee(business_entity_id)
+);
+
+CREATE TABLE Purchasing_PurchaseOrderDetail
+(
+    purchase_order_detail_id INT,
+    purchase_order_id INT,
+    due_date DATE,
+    order_qty INT,
+    product_id INT,
+    unit_price DECIMAL,
+    line_total DECIMAL,
+    revieved_qty INT,
+    rejected_qty INT,
+    stocked_qty INT,
+    modified_date DATE,
+
+    PRIMARY KEY (purchase_order_detail_id),
+    FOREIGN KEY (purchase_order_id) REFERENCES Purchasing_PurchaseOrderHeader(purchase_order_id),
+    FOREIGN KEY (product_id) REFERENCES Production_Product(product_id)
+);
+
+CREATE TABLE Purchasing_Vendor
+(
+    business_entity_id INT,
+    account_number INT,
+    [name] VARCHAR(255),
+    credit_rating INT,
+    preferred_vendor_status INT,
+    active_flag INT,
+    purchasing_web_service_url VARCHAR(255),
+    modified_date DATE,
+
+    PRIMARY KEY (business_entity_id)
+);
+
+CREATE TABLE Sales_SalesTerritory
+(
+    territory_id INT,
+    [name] VARCHAR(100),
+    country_region_code VARCHAR(25),
+    [group] VARCHAR(100),
+    sales_ytd DECIMAL,
+    sales_last_year DECIMAL,
+    cost_ytd DECIMAL,
+    cost_last_year DECIMAL,
+    rowguid UNIQUEIDENTIFIER ROWGUIDCOL DEFAULT NEWID(),
+    modified_date DATE,
+
+    PRIMARY KEY (territory_id)
+);
+
+CREATE TABLE Sales_Store
+(
+    business_entity_id INT,
+    [name] VARCHAR(100),
+    sales_person_id INT,
+    rowguid UNIQUEIDENTIFIER ROWGUIDCOL DEFAULT NEWID(),
+    modified_date DATE,
+
+    PRIMARY KEY (business_entity_id),
+    FOREIGN KEY (sales_person_id) REFERENCES Person_Person(business_entity_id)
+);
+
+CREATE TABLE Sales_Customer
+(
+    customer_id INT,
+    person_id INT,
+    store_id INT,
+    territory_id INT,
+    account_number VARCHAR(255),
+    rowguid UNIQUEIDENTIFIER ROWGUIDCOL DEFAULT NEWID(),
+    modified_date DATE,
+
+    PRIMARY KEY (customer_id),
+    FOREIGN KEY (territory_id) REFERENCES Sales_SalesTerritory(territory_id),
+    FOREIGN KEY (person_id) REFERENCES Person_Person(business_entity_id),
+    FOREIGN KEY (store_id) REFERENCES Sales_Store (business_entity_id)
+);
+
+CREATE TABLE Sales_SalesOrderHeader
+(
+    sales_order_id INT,
+    revision_number INT,
+    order_date DATE,
+    due_date DATE,
+    ship_date DATE,
+    [status] INT,
+    online_order_flag INT,
+    sales_order_number VARCHAR(100),
+    purchase_order_number VARCHAR(100),
+    account_number VARCHAR(50),
+    customer_id INT,
+    sales_person_id INT,
+    territory_id INT,
+    bill_to_address_id INT,
+    ship_to_address_id INT,
+    ship_method_id INT,
+    credit_card_id INT,
+    credit_card_approval_code VARCHAR(50),
+    currency_rate_id INT,
+    sub_total DECIMAL,
+    tax_amt DECIMAL,
+    freight DECIMAL,
+    total_due DECIMAL,
+    comment VARCHAR(255),
+    rowguid UNIQUEIDENTIFIER ROWGUIDCOL DEFAULT NEWID(),
+    modified_date DATE,
+
+    PRIMARY KEY (sales_order_id),
+    FOREIGN KEY (customer_id) REFERENCES Sales_Customer(customer_id),
+    FOREIGN KEY (territory_id) REFERENCES Sales_SalesTerritory(territory_id),
+    FOREIGN KEY (bill_to_address_id) REFERENCES Person_Address(adress_id),
+    FOREIGN KEY (ship_to_address_id) REFERENCES Person_Address(adress_id)
+);
+
+CREATE TABLE Sales_SalerOrderDetails
+(
+    sales_order_details_id INT,
+    sales_order_id INT,
+    order_qty INT,
+    product_id INT,
+    special_offer_id INT,
+    unit_price DECIMAL,
+    unit_price_discount DECIMAL,
+    line_total DECIMAL,
+    rowguid UNIQUEIDENTIFIER ROWGUIDCOL DEFAULT NEWID(),
+    modified_date DATE,
+
+    PRIMARY KEY (sales_order_details_id),
+    FOREIGN KEY (sales_order_id) REFERENCES Sales_SalesOrderHeader(sales_order_id)
+);
