@@ -1,4 +1,3 @@
-import "./styles.css";
 import React, { useCallback, useState } from "react";
 import { PieChart, Pie, Sector } from "recharts";
 
@@ -22,7 +21,7 @@ const renderActiveShape = (props) => {
     fill,
     payload,
     percent,
-    value
+    item
   } = props;
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
@@ -68,7 +67,7 @@ const renderActiveShape = (props) => {
         y={ey}
         textAnchor={textAnchor}
         fill="#333"
-      >{`PV ${value}`}</text>
+      >{`${item}`}</text>
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
         y={ey}
@@ -76,13 +75,13 @@ const renderActiveShape = (props) => {
         textAnchor={textAnchor}
         fill="#999"
       >
-        {`(Rate ${(percent * 100).toFixed(2)}%)`}
+        {`(${(percent * 100).toFixed(2)}% | ${props.value} ${props.item}s)`}
       </text>
     </g>
   );
 };
 
-function CustomPieChart({width, height, data}) {
+function CustomPieChart({width, height, data, activeIndex, onPieEnter, dataKey}) {
     return (
         <PieChart width={width} height={height}>
             <Pie
@@ -94,9 +93,11 @@ function CustomPieChart({width, height, data}) {
                 innerRadius={60}
                 outerRadius={80}
                 fill="#8884d8"
-                dataKey="value"
+                dataKey={dataKey}
                 onMouseEnter={onPieEnter}
             />
         </PieChart>
     );
 }
+
+export default CustomPieChart;
