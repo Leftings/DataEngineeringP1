@@ -1,0 +1,83 @@
+CREATE TABLE DimProduct
+(
+    product_id INT,
+    [name] TEXT,
+    [description] TEXT,
+    category TEXT,
+    color TEXT,
+    unit_price DECIMAL,
+    units_in_stock INT,
+    supplier_name TEXT,
+
+    PRIMARY KEY (product_id)
+);
+
+CREATE TABLE DimDate
+(
+    [date] DATE,
+    [year] INT,
+    [month] INT,
+    [quarter] INT,
+
+    PRIMARY KEY (date)
+);
+
+CREATE TABLE DimTerritory
+(
+    territory_id INT,
+    territory_description TEXT,
+    region_id VARCHAR(20),
+
+    PRIMARY KEY (territory_id)
+);
+
+CREATE TABLE DimCustomer
+(
+    customer_id INT,
+    first_name TEXT,
+    last_name TEXT,
+    company_name TEXT,
+    city TEXT,
+    state TEXT,
+    zip TEXT,
+    region TEXT,
+
+    PRIMARY KEY (customer_id)
+);
+
+CREATE TABLE DimEmployee
+(
+    employee_id INT,
+    first_name TEXT,
+    last_name TEXT,
+    title TEXT,
+    hire_date DATE,
+    department_name TEXT,
+
+    PRIMARY KEY (employee_id),
+    FOREIGN KEY (hire_date) REFERENCES DimDate([date])
+);
+
+CREATE TABLE FactSales
+(
+    sales_order_id INT,
+    customer_id INT,
+    employee_id INT,
+    product_id INT,
+    territory_id INT,
+    order_date DATE,
+    unit_price DECIMAL,
+    quantity INT,
+    discount DECIMAL,
+
+    PRIMARY KEY (sales_order_id),
+    FOREIGN KEY (customer_id) REFERENCES DimCustomer,
+    FOREIGN KEY (employee_id) REFERENCES DimEmployee,
+    FOREIGN KEY (product_id) REFERENCES DimProduct(product_id),
+    FOREIGN KEY (territory_id) REFERENCES DimTerritory(territory_id)
+);
+
+
+
+
+
