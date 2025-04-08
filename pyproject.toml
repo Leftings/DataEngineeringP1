@@ -5,7 +5,7 @@ description = "Eerste project van DEDS"
 authors = [
     {name = "Jarno Vis", email = "84909095+Jarnovis@users.noreply.github.com"},
 ]
-dependencies = []
+dependencies = ["pyodbc>=5.2.0", "ipykernel>=6.29.5", "pandas>=2.2.3", "numpy>=2.0.2", "SciPy>=1.13.1", "dotenv>=0.9.9"]
 requires-python = ">=3.9"
 readme = "README.md"
 license = {text = "MIT"}
